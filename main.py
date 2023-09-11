@@ -25,4 +25,4 @@ if __name__ == '__main__':
     print(pandas_descriptive_stat_mean(cars, 'mpg'))
     print(pandas_descriptive_stat_median(cars, 'mpg'))
     print(pandas_descriptive_stat_std(cars, 'mpg'))
-    visualize_data(cars, 'mpg', 'hp')
+    visualize_data(cars)
