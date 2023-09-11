@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 
 
@@ -12,7 +11,7 @@ def pandas_descriptive_stat_median(df: pd.DataFrame, col: str) -> float:
 def pandas_descriptive_stat_std(df: pd.DataFrame, col: str) -> float:
     return df[col].std()
 
-def visualize_data(df, x_column, y_column):
+def visualize_data(df):
     plt.scatter(df["mpg"], df["hp"])
     plt.xlabel("Miles Per Gallon")
     plt.ylabel("Horse Power")
