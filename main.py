@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 
 def pandas_descriptive_stat_mean(df: pd.DataFrame, col: str) -> float:
@@ -13,9 +13,9 @@ def pandas_descriptive_stat_std(df: pd.DataFrame, col: str) -> float:
     return df[col].std()
 
 def visualize_data(df, x_column, y_column):
-    plt.scatter(df["mpg"], df["cyl"])
-    plt.xlabel("Weight, lbs")
-    plt.ylabel("Miles per Gallon, miles")
+    plt.scatter(df["mpg"], df["hp"])
+    plt.xlabel("Miles Per Gallon")
+    plt.ylabel("Horse Power")
     plt.title("Miles per gallon changes with automible weight")
     plt.show()
 
@@ -26,4 +26,4 @@ if __name__ == '__main__':
     print(pandas_descriptive_stat_mean(cars, 'mpg'))
     print(pandas_descriptive_stat_median(cars, 'mpg'))
     print(pandas_descriptive_stat_std(cars, 'mpg'))
-    visualize_data(cars, 'mpg', 'cyl')
+    visualize_data(cars, 'mpg', 'hp')
