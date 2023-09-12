@@ -2,24 +2,53 @@
 
 Mini-project 2. 
 
-## Descriptive Statistics 
+## Purpose 
 
-This is a mini project to create a descriptive statistics on a [dataset](https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv)
- with created functions to calculate the:
-* Mean
-* Median
-* Standard Deviation
+The purpose of this project is using Pandas to load a dataframe. I used a `pd.DataFrame` as a sample data and test its descriptions using the function `pandas_descriptive_stats_*()`. 
+The visualization on a scatter plot.
 
-Also visualisation was generated below to compare the variables of Miles per Gallon and Horsepower
+## Dataset 
+
+The [dataset](https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv)
+ is about about various cars `Models`, `Miles per gallon`, `Cylinders`, `Gear` etc...
+
+ ## Functions
+
+The Pandas DataFrame is passed into the functions which return:
+ 
+* `Mean`
+* `Median`
+* `Standard Deviation`
+
+  and also a test file to check for the descriptive statistics of the curated above.
+
+  
+## Visualisation 
+
+A scatter plot is generated to compare the variables of Miles per Gallon and Horsepower
 
 ![output](https://github.com/nogibjj/IDS706_mini_project_2/assets/125210401/ce1cb228-d3f5-4888-a51a-845cee91a1b5)
 
-## CI/CD
+## Automation 
 
-This repository is integrated with a CI/CD template for automatic deployment of Python projects within a virtual environment. You can find the template
+used takes into Consideration
 
-# Development Environment
+## 1. devcontainer
 
-The repository includes a .devcontainer folder with configurations for the VS Code remote container development environment.
-The .github/workflows/cicd.yml file defines the Continuous Integration (CI) workflow using GitHub Actions.
+The .devcontainer folder mainly contains two files -
 
+Dockerfile defines the environment variables - essentially it ensures that all collaborators using the repository are working on the same environment to avoid conflicts and version mismatch issues
+devcontainer.json is a json file that specifies the environment variables including the installed extensions in the virtual environment
+
+## 2. Makefile
+
+The Makefile contains instructions for installing packages (specified in requirements.txt), formatting the code (using black formatting), testing the code (running all the sample python code files starting with the term 'Check...' ), and linting the code using pylint
+
+
+## 3. GitHub Actions
+  
+Github Actions uses the main.yml file to call the functions defined in the Makefile based on triggers such as push or pull. Currently, every time a change is pushed onto the repository, it runs the install packages, formatting the code, linting the code, and then testing the code functions
+  
+## 4. Requirements.txt
+
+The requirements.txt file has a list of packages to be installed for any required project. Currently, my requirements file only contains generic python packages, more specific packages can and will be added depending on scope of projects over time.
