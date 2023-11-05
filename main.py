@@ -1,28 +1,39 @@
-import pandas as pd
-import matplotlib.pyplot as plt
+"""
+Main cli or app entry point
+"""
+
+from mylib.lib import (
+    extract,
+    load_data,
+    describe,
+    query,
+    example_transform,
+    start_spark,
+    end_spark,
+)
 
 
-def pandas_descriptive_stat_mean(df: pd.DataFrame, col: str) -> float:
-    return df[col].mean()
+def main():
+    # extract data
+    extract()
+    # start spark session
+    spark = start_spark("Diabetes")
+    # load data into dataframe
+    df = load_data(spark)
+    # example metrics
+    describe(df)
+    # query
+    query(
+        spark,
+        df,
+        "SELECT * FROM diabetes WHERE  Outcome= 0",
+        "diabetes",
+    )
+    # example transform
+    example_transform(df)
+    # end spark session
+    end_spark(spark)
 
-def pandas_descriptive_stat_median(df: pd.DataFrame, col: str) -> float:
-    return df[col].median()
 
-def pandas_descriptive_stat_std(df: pd.DataFrame, col: str) -> float:
-    return df[col].std()
-
-def visualize_data(df):
-    plt.scatter(df["mpg"], df["hp"])
-    plt.xlabel("Miles Per Gallon")
-    plt.ylabel("Horse Power")
-    plt.title("Miles per gallon changes with automible weight")
-    plt.show()
-
-
-if __name__ == '__main__':
-    cars = pd.read_csv(r"https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv")
-    print(cars.head())
-    print(pandas_descriptive_stat_mean(cars, 'mpg'))
-    print(pandas_descriptive_stat_median(cars, 'mpg'))
-    print(pandas_descriptive_stat_std(cars, 'mpg'))
-    visualize_data(cars)
+if __name__ == "__main__":
+    main()
