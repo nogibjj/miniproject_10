@@ -9,6 +9,8 @@ from pyspark.sql.types import (
     StructType,
     StructField,
     IntegerType,
+    #StringType,
+    DoubleType
 )
 
 LOG_FILE = "pyspark_output.md"
@@ -36,9 +38,7 @@ def end_spark(spark):
 
 
 def extract(
-    url="""
-   https://raw.githubusercontent.com/plotly/datasets/master/diabetes.csv 
-    """,
+   url = "https://raw.githubusercontent.com/plotly/datasets/master/diabetes.csv",
     file_path="data/diabetes.csv",
     directory="data",
 ):
@@ -63,14 +63,15 @@ def load_data(spark, data="data/diabetes.csv"):
             StructField("BloodPressure", IntegerType(), True),
             StructField("SkinThickness", IntegerType(), True),
             StructField("Insulin", IntegerType(), True),
-            StructField("BMI", IntegerType(), True),
-            StructField("DiabetesPedigreeFunction", IntegerType(), True),
+            StructField("BMI", DoubleType(), True),
+            StructField("DiabetesPedigreeFunction", DoubleType(), True),
             StructField("Age", IntegerType(), True),
             StructField("Outcome", IntegerType(), True),
         ]
     )
 
     df = spark.read.option("header", "true").schema(schema).csv(data)
+
 
     log_output("load data", df.limit(10).toPandas().to_markdown())
 
@@ -98,7 +99,7 @@ def example_transform(df):
 
     outcome = 0
 
-    df = df.where(df.outcome == outcome)
+    df = df.where(df[8] == outcome)
 
     log_output("transform data", df.limit(10).toPandas().to_markdown())
 

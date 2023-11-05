@@ -17,7 +17,7 @@ def main():
     # extract data
     extract()
     # start spark session
-    spark = start_spark("Diabetes")
+    spark = start_spark("diabetes")
     # load data into dataframe
     df = load_data(spark)
     # example metrics
@@ -26,7 +26,7 @@ def main():
     query(
         spark,
         df,
-        "SELECT * FROM diabetes WHERE  Outcome= 0",
+        "SELECT * FROM diabetes WHERE Outcome = 0",
         "diabetes",
     )
     # example transform
