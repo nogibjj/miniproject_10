@@ -1,31 +1,58 @@
-from main import pandas_descriptive_stat_mean,pandas_descriptive_stat_median,pandas_descriptive_stat_std,visualize_data
-import pandas as pd
+"""
+Test goes here
 
-def test_pandas_descriptive_stat_mean():
-    cars = pd.read_csv(r"https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv")
-    target_column = "mpg"
-    mean_mpg = pandas_descriptive_stat_mean(cars, target_column)
+"""
+import os
+import pytest
+from mylib.lib import (
+    extract,
+    load_data,
+    describe,
+    query,
+    example_transform,
+    start_spark,
+    end_spark,
+)
 
-    calculated_mean = cars[target_column].sum()/len(cars[target_column])
-    assert mean_mpg == calculated_mean
 
-def test_pandas_descriptive_stat_median():
-    cars = pd.read_csv(r"https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv")
-    target_column = "mpg"
-    median_mpg = pandas_descriptive_stat_median(cars, target_column)
+@pytest.fixture(scope="module")
+def spark():
+    spark = start_spark("TestApp")
+    yield spark
+    end_spark(spark)
 
-    calculated_median = cars[target_column].median()
-    assert median_mpg == calculated_median
 
-def test_pandas_descriptive_stat_std():
-    cars = pd.read_csv(r"https://gist.githubusercontent.com/seankross/a412dfbd88b3db70b74b/raw/5f23f993cd87c283ce766e7ac6b329ee7cc2e1d1/mtcars.csv")
-    target_column = "mpg"
-    std_mpg = pandas_descriptive_stat_std(cars, target_column)
+def test_extract():
+    file_path = extract()
+    assert os.path.exists(file_path) is True
 
-    calculated_std = cars[target_column].std()
-    assert std_mpg == calculated_std
+
+def test_load_data(spark):
+    df = load_data(spark)
+    assert df is not None
+
+
+def test_describe(spark):
+    df = load_data(spark)
+    result = describe(df)
+    assert result is None
+
+
+def test_query(spark):
+    df = load_data(spark)
+    result = query(spark, df, "SELECT * FROM diabetes WHERE  Outcome= 0")
+    assert result is None
+
+
+def test_example_transform(spark):
+    df = load_data(spark)
+    result = example_transform(df)
+    assert result is None
+
 
 if __name__ == "__main__":
-    test_pandas_descriptive_stat_mean()
-    test_pandas_descriptive_stat_median()
-    test_pandas_descriptive_stat_std()
+    test_extract()
+    test_load_data(spark)
+    test_describe(spark)
+    test_query(spark)
+    test_example_transform(spark)
