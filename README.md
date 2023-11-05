@@ -1,4 +1,4 @@
-mini 10
+mini 10 [![CI](https://github.com/nogibjj/miniproject_10/actions/workflows/ci.yml/badge.svg)](https://github.com/nogibjj/miniproject_10/actions/workflows/ci.yml)
 
 ## Automation 
 
