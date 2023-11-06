@@ -1,25 +1,41 @@
-mini 10 [![CI](https://github.com/nogibjj/miniproject_10/actions/workflows/ci.yml/badge.svg)](https://github.com/nogibjj/miniproject_10/actions/workflows/ci.yml)
+## Pyspark [![CI](https://github.com/nogibjj/miniproject_10/actions/workflows/ci.yml/badge.svg)](https://github.com/nogibjj/miniproject_10/actions/workflows/ci.yml)
 
-## Automation 
+#### What is Pyspark
 
-used takes into Consideration
+PySpark is the Python API for Apache Spark, an open source, distributed computing framework and set of libraries for real-time, large-scale data processing. If you’re already familiar with Python and libraries such as Pandas, then PySpark is a good language to learn to create more scalable analyses and pipelines.
 
-## 1. devcontainer
+Apache Spark is basically a computational engine that works with huge sets of data by processing them in parallel and batch systems. Spark is written in Scala, and PySpark was released to support the collaboration of Spark and Python. In addition to providing an API for Spark, PySpark helps you interface with Resilient Distributed Datasets (RDDs) by leveraging the Py4j library.
 
-The .devcontainer folder mainly contains two files -
+#### Spark Sql
 
-Dockerfile defines the environment variables - essentially it ensures that all collaborators using the repository are working on the same environment to avoid conflicts and version mismatch issues
-devcontainer.json is a json file that specifies the environment variables including the installed extensions in the virtual environment
+PySpark provides an easy-to-use interface to Spark SQL, allowing users to perform complex data processing tasks with few lines of code. With PySpark, users can create Spark DataFrames, which is similar to Pandas DataFrames and can be queried using Spark SQL.
 
-## 2. Makefile
+Spark SQL is a module in Apache Spark that provides a programming interface and SQL query engine for data stored in Spark’s supported data sources. It allows users to query data stored in Spark’s Resilient Distributed Datasets (RDDs), Apache Hive, Parquet, JSON, and JDBC data sources.
 
-The Makefile contains instructions for installing packages (specified in requirements.txt), formatting the code (using black formatting), testing the code (running all the sample python code files starting with the term 'Check...' ), and linting the code using pylint
+PySpark dataframe needs to be registered before they can be queried with Spark SQL.
 
+#### Dataset
 
-## 3. GitHub Actions
-  
-Github Actions uses the main.yml file to call the functions defined in the Makefile based on triggers such as push or pull. Currently, every time a change is pushed onto the repository, it runs the install packages, formatting the code, linting the code, and then testing the code functions
-  
-## 4. Requirements.txt
+This is a dataset on diabetes with these columns; 
 
-The requirements.txt file has a list of packages to be installed for any required project. Currently, my requirements file only contains generic python packages, more specific packages can and will be added depending on scope of projects over time.
+- Pregnancies
+- Glucose
+- Blood Pressure
+- SkinThickness
+- Insulin
+- BMI
+- Diabetes Pedigree Function
+- Age
+- Outcome
+
+#### SQL Query
+
+This subsets the data where the `Outcome` = `0`
+<img width="1080" alt="Screenshot 2023-11-06 at 2 25 01 PM" src="https://github.com/nogibjj/miniproject_10/assets/125210401/d24f8241-3b0f-4723-aef6-2723ad30fb14">
+
+#### Summary Statistics 
+
+This is a sumary statistics of the data which can also be found in the `Pyspark_output.md`
+
+<img width="1049" alt="Screenshot 2023-11-06 at 2 27 23 PM" src="https://github.com/nogibjj/miniproject_10/assets/125210401/320497bd-62eb-44b9-b0c3-f1e38c21b86e">
+
